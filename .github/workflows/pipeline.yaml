@@ -1,0 +1,47 @@
+name: XGuardian Scan
+
+on:
+  workflow_dispatch:
+    inputs:
+      scan_type:
+        description: 'Tipo de scan'
+        required: true
+        type: choice
+        options:
+          - SAST
+          - SAST+SCA
+
+jobs:
+  sast:
+    name: XGuardian — SAST
+    if: ${{ github.event.inputs.scan_type == 'SAST' }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout do repositório
+        uses: actions/checkout@v4
+
+      - name: Scan SAST
+        uses: xguardian-actions/actions/sast@development
+        with:
+          token: ${{ secrets.XGUARDIAN_TOKEN }}
+          app_name: "sastpipeline"
+          app_id: "1830"
+          pdf: "true"
+          get_scan_id: "true"
+
+  sast-sca:
+    name: XGuardian — SAST + SCA
+    if: ${{ github.event.inputs.scan_type == 'SAST+SCA' }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout do repositório
+        uses: actions/checkout@v4
+
+      - name: Scan SAST + SCA
+        uses: xguardian-actions/actions/sast-sca@development
+        with:
+          token: ${{ secrets.XGUARDIAN_TOKEN }}
+          app_name: "sastscapipeline"
+          app_id: "1830"
+          pdf: "true"
+          get_scan_id: "true"
