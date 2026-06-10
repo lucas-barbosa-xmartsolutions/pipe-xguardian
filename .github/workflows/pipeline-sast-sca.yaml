@@ -1,0 +1,31 @@
+name: XGuardian SAST + SCA
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+
+jobs:
+  xguardian-sast-sca:
+    name: XGuardian — SAST + SCA
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout do repositório
+        uses: actions/checkout@v4
+
+      - name: Scan SAST + SCA
+        uses: xguardian-actions/actions/sast-sca@development
+        with:
+          token: ${{ secrets.XGUARDIAN_TOKEN }}
+          app_name: "sastscapipeline"
+          app_id: "1830"
+          pdf: "true"
+          get_scan_id: "true"
+          # sast: "true"          # padrão
+          # sca: "true"           # padrão
+          # scan_directory: "."   # padrão
+          # exclude: "node_modules/,dist/"
+          # translate: "false"
+          # pdf: "false"
+          # get_scan_id: "false"
