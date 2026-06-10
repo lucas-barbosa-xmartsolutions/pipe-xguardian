@@ -1,0 +1,30 @@
+name: XGuardian - SAST Scan (WebGoat)
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+jobs:
+  sast-scan:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: XGuardian SAST Scan
+        uses: xguardian-actions/actions/sast@main
+        with:
+          token: ${{ secrets.XGUARDIAN_TOKEN }}
+          app_name: "TesteProd"
+          team_id: "[1830]"
+          languages: '["Java"]'
+          description: "OWASP WebGoat - aplicação vulnerável para testes de SAST"
+          policy_sast: "0"
+          pdf: "true"
+          get_scan_id: "true"
