@@ -9,6 +9,7 @@ on:
         type: choice
         options:
           - SAST
+          - SCA
           - SAST+SCA
 
 jobs:
@@ -25,6 +26,23 @@ jobs:
         with:
           token: ${{ secrets.XGUARDIAN_TOKEN }}
           app_name: "sastpipeline"
+          app_id: "1830"
+          pdf: "true"
+          get_scan_id: "true"
+
+  sca:
+    name: XGuardian — SCA
+    if: ${{ github.event.inputs.scan_type == 'SCA' }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout do repositório
+        uses: actions/checkout@v4
+
+      - name: Scan SCA
+        uses: xguardian-actions/actions/sca@development
+        with:
+          token: ${{ secrets.XGUARDIAN_TOKEN }}
+          app_name: "scapipeline"
           app_id: "1830"
           pdf: "true"
           get_scan_id: "true"
