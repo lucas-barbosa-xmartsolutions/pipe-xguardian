@@ -21,7 +21,6 @@ jobs:
         uses: xguardian-actions/actions/sast@development
         with:
           token: ${{ secrets.XGUARDIAN_TOKEN }}
-          app_name: "TSTCentralDeRiscos"
           app_id: "1830"
           pdf: "true"
           get_scan_id: "true"
