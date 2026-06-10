@@ -18,7 +18,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: XGuardian SAST Scan
-        uses: xguardian-actions/actions/sast@main
+        uses: xguardian-actions/actions/sast@development
         with:
           token: ${{ secrets.XGUARDIAN_TOKEN }}
           app_name: "TesteProd"
