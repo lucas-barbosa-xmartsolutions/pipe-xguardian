@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
     inputs:
       scan_type:
-        description: 'Tipo de scan'
+        description: "Tipo de scan"
         required: true
         type: choice
         options:
@@ -26,7 +26,7 @@ jobs:
         with:
           token: ${{ secrets.XGUARDIAN_TOKEN }}
           app_name: "sastpipeline"
-          app_id: "1830"
+          app_id: "418"
           pdf: "true"
           get_scan_id: "true"
 
@@ -43,7 +43,7 @@ jobs:
         with:
           token: ${{ secrets.XGUARDIAN_TOKEN }}
           app_name: "scapipeline"
-          app_id: "1830"
+          app_id: "418"
           pdf: "true"
           get_scan_id: "true"
 
@@ -60,6 +60,6 @@ jobs:
         with:
           token: ${{ secrets.XGUARDIAN_TOKEN }}
           app_name: "sastscapipeline"
-          app_id: "1830"
+          app_id: "418"
           pdf: "true"
           get_scan_id: "true"
